@@ -1,15 +1,15 @@
 {
-  "name": "redux-launchpad",
+  "name": "dosequis-site",
   "version": "1.0.0",
-  "description": "Simple starter package for Redux with React and Babel support",
+  "description": "the most interesting website in the world.",
   "main": "index.js",
-  "repository": "git@github.com:ebrewe/ReduxLaunchpad",
+  "repository": "",
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch"
   },
-  "author": "ebrewe",
+  "author": "sandbox",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.2.1",
@@ -21,6 +21,7 @@
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-minify": "0.0.7",
+    "gulp-plumber": "^1.1.0",
     "gulp-sass": "^2.2.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",
@@ -40,6 +41,7 @@
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.0",
     "react-router": "^2.0.1",
-    "redux": "^3.0.4"
+    "redux": "^3.0.4",
+    "redux-promise": "^0.5.3"
   }
 }

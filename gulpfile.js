@@ -9,13 +9,15 @@ var concat = require('gulp-concat');
 var minify = require('gulp-minify');
 var sourcemaps = require('gulp-sourcemaps');
 
+var plumber = require('gulp-plumber');
+
 var watch = require('gulp-watch');
 
 //paths
-var DIST_PATH = "public/dist/";
+var DIST_PATH = "dist/";
 var STYLE_PATH = "style/**/*.scss";
 
-gulp.task("default", ['styles', 'watch', 'webpack-dev-server']);
+gulp.task("default", ['styles', 'images', 'watch', 'webpack-dev-server']);
 
 gulp.task("watch", function(){
   return gulp.watch([STYLE_PATH], ['styles']);
@@ -25,12 +27,19 @@ gulp.task("styles", function(){
     console.log('running styles')
     return gulp.src(STYLE_PATH)
       .pipe(sourcemaps.init())
+      .pipe(plumber())
       .pipe(sass({
-        output:'compressed'
+        outputStyle:'compressed'
       }))
       .pipe(sourcemaps.write())
       .pipe(gulp.dest(DIST_PATH + 'style/'));
 });
+
+gulp.task('images', function(){
+  console.log('migrating images');
+  return gulp.src('src/images/**/*')
+    .pipe(gulp.dest(DIST_PATH + 'images/'));
+})
 
 gulp.task("webpack-dev-server", function(callback) {
 	// modify some webpack config options
@@ -39,7 +48,7 @@ gulp.task("webpack-dev-server", function(callback) {
 	myConfig.debug = true;
 
 	// Start a webpack-dev-server
-	new WebpackDevServer(webpack(myConfig), {
+	/*new WebpackDevServer(webpack(myConfig), {
 		publicPath: myConfig.output.publicPath,
 		stats: {
 			colors: true
@@ -47,7 +56,8 @@ gulp.task("webpack-dev-server", function(callback) {
 	}).listen(8080, "localhost", function(err) {
 		if(err) throw new gutil.PluginError("webpack-dev-server", err);
 		gutil.log("[webpack-dev-server]", "http://localhost:8080/webpack-dev-server/index.html");
-	});
+	});*/
+	require('./node_modules/webpack-dev-server/bin/webpack-dev-server.js');
 });
 
 // Production build
